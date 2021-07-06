@@ -48,7 +48,6 @@ func main() {
 	log.SetEnableDebugLog(configs.VerboseLog)
 
 	fmt.Println()
-	successful := true
 	successCount := 0
 
 	log.Infof("Uploading app and test files")
@@ -150,7 +149,6 @@ func main() {
 						successCount++
 						outcome = colorstring.Green(outcome)
 					case "failure":
-						successful = false
 						if step.Outcome.FailureDetail != nil {
 							if step.Outcome.FailureDetail.Crashed {
 								outcome += "(Crashed)"
@@ -170,7 +168,6 @@ func main() {
 						}
 						outcome = colorstring.Red(outcome)
 					case "inconclusive":
-						successful = false
 						if step.Outcome.InconclusiveDetail != nil {
 							if step.Outcome.InconclusiveDetail.AbortedByUser {
 								outcome += "(AbortedByUser)"
@@ -181,7 +178,6 @@ func main() {
 						}
 						outcome = colorstring.Yellow(outcome)
 					case "skipped":
-						successful = false
 						if step.Outcome.SkippedDetail != nil {
 							if step.Outcome.SkippedDetail.IncompatibleAppVersion {
 								outcome += "(IncompatibleAppVersion)"
