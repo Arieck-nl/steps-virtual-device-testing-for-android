@@ -49,6 +49,7 @@ func main() {
 
 	fmt.Println()
 	successful := true
+	successCount := 0
 
 	log.Infof("Uploading app and test files")
 
@@ -146,6 +147,7 @@ func main() {
 
 					switch outcome {
 					case "success":
+						successCount++
 						outcome = colorstring.Green(outcome)
 					case "failure":
 						successful = false
@@ -262,7 +264,7 @@ func main() {
 		}
 	}
 
-	if !successful {
+	if successCount <= 0 {
 		os.Exit(1)
 	}
 }
